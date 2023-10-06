@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <h1 class="text-center mb-3"><span class="temp" ><i class="fas fa-temperature-low"></i> </span>Temperature Converter</h1><br><br>
+            <label for="temperatureInput">Enter temperature:</label>
+            <div class="tempenter">
+            <input type="number" id="temperatureInput" placeholder="Enter temperature" required>
+        </div><br>
+            <div class="unitselection">
+            <label for="unitSelect">Select unit:</label><br>
+            <select id="unitSelect">
+                <option value="celsius">Celsius</option>
+                <option value="fahrenheit">Fahrenheit</option>
+                <option value="kelvin">Kelvin</option>
+            </select>
+        </div>
+        <div class="output">
+            <button onclick="convertTemperature()">Convert</button>
+        </div>
+        <div id="convertedTemperature"></div>
+    </div>
+    </div>
+
+    <style>
+        body {
+            margin-top: 150px;
+            background: #064789;
+            color: #000000;
+          }
+          
+          .container {
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            background-color: #EBF2FA;
+            padding: 40px;
+            box-shadow: 0px 0px 40px rgba(0, 0, 0, .3);
+            line-height: 20px;
+          }
+          .unitselection{
+            line-height: 30px;
+          }
+          .output {
+            padding: 30px;;
+          }
+          .output button {
+            padding: auto; 
+            font-size: 20px; 
+            align-items: center;
+          }
+          #convertedTemperature{
+            background-color: white; 
+            color: black; 
+            font-weight: bold; 
+            padding: auto;
+            line-height: 20px;
+            text-align: center;
+          }
+    </style>
+    <script>
+        function convertTemperature() {
+          const temperatureInput = parseFloat(document.getElementById('temperatureInput').value);
+          const unit = document.getElementById('unitSelect').value;
+          let convertedTemperature = 0;
+          let convertedUnit = '';
+    
+          if (isNaN(temperatureInput)) {
+            alert('Please enter a valid number for temperature.');
+            return;
+          }
+    
+          if (unit === 'celsius') {
+            convertedTemperature = (temperatureInput * 9/5) + 32;
+            convertedUnit = 'Celcius';
+          } else if (unit === 'fahrenheit') {
+            convertedTemperature = (temperatureInput - 32) * 5/9;
+            convertedUnit = 'Fahrenheit';
+          } else if (unit === 'kelvin') {
+            convertedTemperature = temperatureInput + 273.15;
+            convertedUnit = 'Kelvin';
+          }
+          const displayArea = document.getElementById('convertedTemperature');
+          displayArea.innerText = `Result: ${convertedTemperature.toFixed(2)} ${convertedUnit}`;
+        }
+      </script>
+</body>
+</html>
